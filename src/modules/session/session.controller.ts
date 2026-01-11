@@ -23,6 +23,14 @@ export const sessionController = {
     next: NextFunction
   ) => {
     try {
+      const sessions: ISession[] = await sessionService.sendStudentSession(
+        (req as any).user.id
+      );
+      return res.status(200).json({
+        success: true,
+        count: sessions.length,
+        sessions,
+      });
     } catch (err) {
       next(err);
     }

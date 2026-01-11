@@ -16,4 +16,12 @@ export const sessionService = {
     if (!studentExists) throw new ExpressError(404, "Student Not Found");
     return await sessionRepository.create(sessionData, studentId);
   },
+
+  sendStudentSession: async (studentId: string): Promise<ISession[]> => {
+    const studentExists: IStudent | null = await studentRepository.findById(
+      studentId
+    );
+    if (!studentExists) throw new ExpressError(404, "Student Not Found");
+    return await sessionRepository.sendAllSessions(studentId);
+  },
 };

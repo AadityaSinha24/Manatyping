@@ -12,4 +12,10 @@ export const sessionRepository = {
       studentId: new mongoose.Types.ObjectId(studentId),
     });
   },
+
+  sendAllSessions: async (studentId: string): Promise<ISession[]> => {
+    return await Session.find({ studentId }).sort({
+      createdAt: -1,
+    });
+  },
 };
