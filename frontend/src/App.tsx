@@ -3,6 +3,11 @@ import Login from "./auth/Login";
 import Editor from "./editor/Editor";
 import TeacherDashboard from "./dashboard/TeacherDashboard";
 import ProtectedRoute from "./auth/ProtectedRoute";
+import StudentDashboard from "./student/StudentDashboard";
+// import ProtectedRoute from "./auth/ProtectedRoute";
+
+
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -24,6 +29,14 @@ export default function App() {
   element={
     <ProtectedRoute role="teacher">
       <TeacherDashboard />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/student"
+  element={
+    <ProtectedRoute role="student">
+      <StudentDashboard />
     </ProtectedRoute>
   }
 />
