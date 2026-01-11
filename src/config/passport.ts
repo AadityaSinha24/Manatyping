@@ -8,7 +8,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-      callbackURL: "/api/user/google/callback",
+      callbackURL: "/api/student/google/callback",
     },
     async (_accessToken, _refreshToken, profile, done) => {
       try {
@@ -25,7 +25,7 @@ passport.use(
         const newUser = await Student.create({
           name: profile.displayName,
           email: profile.emails?.[0].value,
-          password: "google-Outh",
+          password: process.env.SECRET,
         });
 
         done(null, newUser);
