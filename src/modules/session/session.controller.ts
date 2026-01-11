@@ -35,4 +35,50 @@ export const sessionController = {
       next(err);
     }
   },
+
+  getStudentSessionByID: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const studentID: string = req.params.studentID as string;
+      const sessions: ISession[] = await sessionService.sendStudentSession(
+        studentID
+      );
+      return res.status(200).json({
+        success: true,
+        count: sessions.length,
+        sessions,
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  getSession: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id: string = req.params.id as string;
+      const sessions: ISession = await sessionService.sendSession(id);
+      return res.status(200).json({
+        success: true,
+        sessions,
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  deleteSession: async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const id: string = req.params.id as string;
+      await sessionService.deleteSession(id);
+      return res.status(200).json({
+        success: true,
+        message: "Session Deleted",
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
 };

@@ -18,4 +18,12 @@ export const sessionRepository = {
       createdAt: -1,
     });
   },
+
+  sendSessions: async (id: string): Promise<ISession | null> => {
+    return await Session.findById(id);
+  },
+
+  deleteSessions: async (id: string): Promise<ISession | null> => {
+    return await Session.findByIdAndDelete(id);
+  },
 };
